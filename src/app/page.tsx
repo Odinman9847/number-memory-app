@@ -20,6 +20,8 @@ export default function HomePage() {
   const [numberToMemorize, setNumberToMemorize] = useState("");
   const [elapsedTime, setElapsedTime] = useState(0);
   const [finalTime, setFinalTime] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [score, setScore] = useState(0);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -51,6 +53,28 @@ export default function HomePage() {
   const handleMemorized = () => {
     setFinalTime(elapsedTime);
     setGameState("recall");
+  };
+
+  const handleSubmit = () => {
+    const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
+    let correctDigits = 0;
+    for (let i = 0; i < numberToMemorize.length; i++) {
+      if (numberToMemorize[i] === cleanedUserAnswer[i]) {
+        correctDigits++;
+      }
+    }
+    setScore(correctDigits);
+    setGameState("results");
+  };
+
+  const handlePlayAgain = () => {
+    setGameState("setup");
+    setNumberOfDigits("");
+    setNumberToMemorize("");
+    setUserAnswer("");
+    setScore(0);
+    setElapsedTime(0);
+    setFinalTime(0);
   };
 
   if (gameState === "setup") {
@@ -120,9 +144,47 @@ export default function HomePage() {
           <input
             type="text"
             className="bg-slate-700 p-2 rounded-md text-center text-x1 font-mono tracking-widest w-96"
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
           />
-          <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
+            onClick={handleSubmit}
+          >
             Submit
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  if (gameState === "results") {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+        <div className="flex flex-col items-center gap-6 text-center">
+          <h1 className="text-5xl font-bold">Results</h1>
+          <p className="text-2xl">
+            You scored <span className="text-green-400 font-bold">{score}</span>{" "}
+            out of <span className="font-bold">{numberToMemorize.length} </span>
+            correct!
+          </p>
+          <p className="text-xl">
+            Your time was
+            <span className="font-bold"> {finalTime.toFixed(2)}s</span>.
+          </p>
+          <div className="font-mono text-lg mt-4">
+            <p className="text-slate-400">Correct Answer:</p>
+            <p className="tracking-widest">{formatNumber(numberToMemorize)}</p>
+            <p className="text-slate-400 mt-2">Your Answer:</p>
+            <p className="tracking-widest">
+              {formatNumber(userAnswer.replace(/\s/g, ""))}
+            </p>
+          </div>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 px-6 xy-2 rounded-md text-xl mt-4"
+            onClick={handlePlayAgain}
+          >
+            Play Again
           </button>
         </div>
       </main>
