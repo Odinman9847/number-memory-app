@@ -2,7 +2,7 @@ type RecallScreenProps = {
   finalTime: number;
   userAnswer: string;
   setUserAnswer: (value: string) => void;
-  handleSubmit: () => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   numberOfDigits: string;
 };
 
@@ -17,7 +17,10 @@ export default function RecallScreen({
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-      <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col items-center gap-8 w-full max-w-4xl"
+      >
         <div className="text-xl text-slate-400">
           Your Memorization Time:
           <span className="text2xl text-white ml-2">
@@ -38,12 +41,12 @@ export default function RecallScreen({
         </div>
 
         <button
+          type="submit"
           className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-          onClick={handleSubmit}
         >
           Submit
         </button>
-      </div>
+      </form>
     </main>
   );
 }

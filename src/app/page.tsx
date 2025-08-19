@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import SetupScreen from "@/components/SetupScreen";
 import MemorizeScreen from "@/components/MemorizeScreen";
 import RecallScreen from "@/components/RecallScreen";
@@ -24,6 +24,63 @@ export default function HomePage() {
   const [score, setScore] = useState(0);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const handleStartGame = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const digits = parseInt(numberOfDigits, 10);
+    if (isNaN(digits) || digits <= 0) {
+      alert("Please enter a valid number of digits.");
+      return;
+    }
+    const newNumber = generateRandomNumber(digits);
+    setNumberToMemorize(newNumber);
+    setGameState("memorizing");
+  };
+
+  const handleMemorized = useCallback(() => {
+    setFinalTime(elapsedTime);
+    setGameState("recall");
+  }, [elapsedTime]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
+    let correctDigits = 0;
+    for (let i = 0; i < numberToMemorize.length; i++) {
+      if (numberToMemorize[i] === cleanedUserAnswer[i]) {
+        correctDigits++;
+      }
+    }
+    setScore(correctDigits);
+    setGameState("results");
+  };
+
+  const handlePlayAgain = useCallback(() => {
+    setGameState("setup");
+    setNumberToMemorize("");
+    setUserAnswer("");
+    setScore(0);
+    setElapsedTime(0);
+    setFinalTime(0);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        if (gameState === "memorizing") {
+          handleMemorized();
+        } else if (gameState === "results") {
+          handlePlayAgain();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [gameState, handleMemorized, handlePlayAgain]);
+
   useEffect(() => {
     if (gameState === "memorizing") {
       const startTime = Date.now();
@@ -38,44 +95,6 @@ export default function HomePage() {
       }
     };
   }, [gameState]);
-
-  const handleStartGame = () => {
-    const digits = parseInt(numberOfDigits, 10);
-    if (isNaN(digits) || digits <= 0) {
-      alert("Please enter a valid number of digits.");
-      return;
-    }
-    const newNumber = generateRandomNumber(digits);
-    setNumberToMemorize(newNumber);
-    setGameState("memorizing");
-  };
-
-  const handleMemorized = () => {
-    setFinalTime(elapsedTime);
-    setGameState("recall");
-  };
-
-  const handleSubmit = () => {
-    const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
-    let correctDigits = 0;
-    for (let i = 0; i < numberToMemorize.length; i++) {
-      if (numberToMemorize[i] === cleanedUserAnswer[i]) {
-        correctDigits++;
-      }
-    }
-    setScore(correctDigits);
-    setGameState("results");
-  };
-
-  const handlePlayAgain = () => {
-    setGameState("setup");
-    setNumberOfDigits("");
-    setNumberToMemorize("");
-    setUserAnswer("");
-    setScore(0);
-    setElapsedTime(0);
-    setFinalTime(0);
-  };
 
   if (gameState === "setup") {
     return (
