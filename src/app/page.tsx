@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import SetupScreen from "@/components/SetupScreen";
+import MemorizeScreen from "@/components/MemorizeScreen";
+import RecallScreen from "@/components/RecallScreen";
+import ResultsScreen from "@/components/ResultsScreen";
 
 const generateRandomNumber = (length: number): string => {
   let result = "";
@@ -8,10 +12,6 @@ const generateRandomNumber = (length: number): string => {
     result += Math.floor(Math.random() * 10).toString();
   }
   return result;
-};
-
-const formatNumber = (numStr: string): string => {
-  return numStr.match(/.{1,2}/g)?.join(" ") || "";
 };
 
 export default function HomePage() {
@@ -79,115 +79,44 @@ export default function HomePage() {
 
   if (gameState === "setup") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        <div className="flex flex-col items-center gap-8">
-          <h1 className="text-5xl font-bold">Number Memory Challenge</h1>
-          <div className="flex flex-col gap-2">
-            <label
-              htmlFor="digits"
-              className="text-lg text-slate-400 text-center"
-            >
-              How many digits?
-            </label>
-            <input
-              id="digits"
-              type="number"
-              className="bg-slate-700 p-2 rounded-md text-center text-xl"
-              value={numberOfDigits}
-              onChange={(e) => setNumberOfDigits(e.target.value)}
-            />
-          </div>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-            onClick={handleStartGame}
-          >
-            Start Game
-          </button>
-        </div>
-      </main>
+      <SetupScreen
+        numberOfDigits={numberOfDigits}
+        setNumberOfDigits={setNumberOfDigits}
+        handleStartGame={handleStartGame}
+      />
     );
   }
 
   if (gameState === "memorizing") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        <div className="flex flex-col items-center gap-8">
-          <h1 className="text-3xl text-slate-400">Memorize the number</h1>
-          <div className="text-2xl text-slate-500">
-            Time: {elapsedTime.toFixed(2)}s
-          </div>
-          <div className="text-6xl font-mono tracking-widest">
-            {formatNumber(numberToMemorize)}
-          </div>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-            onClick={handleMemorized}
-          >
-            I've Memorized It!
-          </button>
-        </div>
-      </main>
+      <MemorizeScreen
+        numberToMemorize={numberToMemorize}
+        elapsedTime={elapsedTime}
+        handleMemorized={handleMemorized}
+      />
     );
   }
 
   if (gameState === "recall") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        <div className="flex flex-col items-center gap-8">
-          <div className="text-xl text-slate-400">
-            Your Memorization Time:
-            <span className="text2xl text-white ml-2">
-              {finalTime.toFixed(2)}s
-            </span>
-          </div>
-          <h1 className="text-3xl text-slate-400">What was the number?</h1>
-          <input
-            type="text"
-            className="bg-slate-700 p-2 rounded-md text-center text-x1 font-mono tracking-widest w-96"
-            value={userAnswer}
-            onChange={(e) => setUserAnswer(e.target.value)}
-          />
-          <button
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        </div>
-      </main>
+      <RecallScreen
+        finalTime={finalTime}
+        userAnswer={userAnswer}
+        setUserAnswer={setUserAnswer}
+        handleSubmit={handleSubmit}
+      />
     );
   }
 
   if (gameState === "results") {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h1 className="text-5xl font-bold">Results</h1>
-          <p className="text-2xl">
-            You scored <span className="text-green-400 font-bold">{score}</span>{" "}
-            out of <span className="font-bold">{numberToMemorize.length} </span>
-            correct!
-          </p>
-          <p className="text-xl">
-            Your time was
-            <span className="font-bold"> {finalTime.toFixed(2)}s</span>.
-          </p>
-          <div className="font-mono text-lg mt-4">
-            <p className="text-slate-400">Correct Answer:</p>
-            <p className="tracking-widest">{formatNumber(numberToMemorize)}</p>
-            <p className="text-slate-400 mt-2">Your Answer:</p>
-            <p className="tracking-widest">
-              {formatNumber(userAnswer.replace(/\s/g, ""))}
-            </p>
-          </div>
-          <button
-            className="bg-blue-600 hover:bg-blue-700 px-6 xy-2 rounded-md text-xl mt-4"
-            onClick={handlePlayAgain}
-          >
-            Play Again
-          </button>
-        </div>
-      </main>
+      <ResultsScreen
+        score={score}
+        numberToMemorize={numberToMemorize}
+        finalTime={finalTime}
+        userAnswer={userAnswer}
+        handlePlayAgain={handlePlayAgain}
+      />
     );
   }
 }
