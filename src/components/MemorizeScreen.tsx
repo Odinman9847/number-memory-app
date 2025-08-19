@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 type MemorizeScreenProps = {
   numberToMemorize: string;
   elapsedTime: number;
@@ -25,12 +27,7 @@ export default function MemorizeScreen({
         <div className="text-6xl font-mono tracking-widest text-center lg:text-left">
           {formatNumber(numberToMemorize)}
         </div>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-          onClick={handleMemorized}
-        >
-          I've Memorized It!
-        </button>
+        <Button onClick={handleMemorized}>I've Memorized It!</Button>
       </div>
     </main>
   );

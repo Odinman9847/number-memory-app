@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 type RecallScreenProps = {
   finalTime: number;
   userAnswer: string;
@@ -48,12 +50,7 @@ export default function RecallScreen({
           </p>
         </div>
 
-        <button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-        >
-          Submit
-        </button>
+        <Button type="submit">Submit</Button>
       </form>
     </main>
   );

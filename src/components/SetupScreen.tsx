@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 type SetupScreenProps = {
   numberOfDigits: string;
   setNumberOfDigits: (value: string) => void;
@@ -33,12 +35,7 @@ export default function SetupScreen({
             onChange={(e) => setNumberOfDigits(e.target.value)}
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
-        >
-          Start Game
-        </button>
+        <Button type="submit">Start Game</Button>
       </form>
     </main>
   );
