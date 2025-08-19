@@ -51,7 +51,7 @@ export default function ResultsScreen({
           </p>
         </div>
         <button
-          className="bg-blue-600 hover:bg-blue-700 px-6 xy-2 rounded-md text-xl mt-4"
+          className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl mt-4"
           onClick={handlePlayAgain}
         >
           Play Again

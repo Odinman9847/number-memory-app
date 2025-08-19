@@ -27,13 +27,15 @@ export default function RecallScreen({
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-8 w-full max-w-4xl"
       >
-        <div className="text-xl text-slate-400">
+        <div className="text-xl text-slate-400 text-center">
           Your Memorization Time:
           <span className="text2xl text-white ml-2">
             {finalTime.toFixed(2)}s
           </span>
         </div>
-        <h1 className="text-3xl text-slate-400">What was the number?</h1>
+        <h1 className="text-3xl text-slate-400 text-center">
+          What was the number?
+        </h1>
         <div className="flex w-full max-w-lg flex-col items-center gap-2">
           <input
             type="text"
