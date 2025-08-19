@@ -15,7 +15,7 @@ const generateRandomNumber = (length: number): string => {
 };
 
 export default function HomePage() {
-  const [numberOfDigits, setNumberOfDigits] = useState("");
+  const [numberOfDigits, setNumberOfDigits] = useState("10");
   const [gameState, setGameState] = useState("setup");
   const [numberToMemorize, setNumberToMemorize] = useState("");
   const [elapsedTime, setElapsedTime] = useState(0);
