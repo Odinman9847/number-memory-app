@@ -19,6 +19,7 @@ export default function HomePage() {
   const [gameState, setGameState] = useState("setup");
   const [numberToMemorize, setNumberToMemorize] = useState("");
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [finalTime, setFinalTime] = useState(0);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -45,6 +46,11 @@ export default function HomePage() {
     const newNumber = generateRandomNumber(digits);
     setNumberToMemorize(newNumber);
     setGameState("memorizing");
+  };
+
+  const handleMemorized = () => {
+    setFinalTime(elapsedTime);
+    setGameState("recall");
   };
 
   if (gameState === "setup") {
@@ -89,8 +95,34 @@ export default function HomePage() {
           <div className="text-6xl font-mono tracking-widest">
             {formatNumber(numberToMemorize)}
           </div>
-          <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl">
+          <button
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
+            onClick={handleMemorized}
+          >
             I've Memorized It!
+          </button>
+        </div>
+      </main>
+    );
+  }
+
+  if (gameState === "recall") {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+        <div className="flex flex-col items-center gap-8">
+          <div className="text-xl text-slate-400">
+            Your Memorization Time:
+            <span className="text2xl text-white ml-2">
+              {finalTime.toFixed(2)}s
+            </span>
+          </div>
+          <h1 className="text-3xl text-slate-400">What was the number?</h1>
+          <input
+            type="text"
+            className="bg-slate-700 p-2 rounded-md text-center text-x1 font-mono tracking-widest w-96"
+          />
+          <button className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl">
+            Submit
           </button>
         </div>
       </main>
