@@ -48,7 +48,6 @@ export default function ResultsScreen({
                 </span>
               );
             })}
-            ;
           </p>
         </div>
         <button
