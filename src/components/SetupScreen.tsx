@@ -11,8 +11,10 @@ export default function SetupScreen({
 }: SetupScreenProps) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-      <div className="flex flex-col items-center gap-8">
-        <h1 className="text-5xl font-bold">Number Memory Challenge</h1>
+      <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
+        <h1 className="text-5xl font-bold text-center">
+          Number Memory Challenge
+        </h1>
         <div className="flex flex-col gap-2">
           <label
             htmlFor="digits"

@@ -13,7 +13,7 @@ export default function RecallScreen({
 }: RecallScreenProps) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
         <div className="text-xl text-slate-400">
           Your Memorization Time:
           <span className="text2xl text-white ml-2">

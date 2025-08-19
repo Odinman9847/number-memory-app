@@ -19,7 +19,7 @@ export default function ResultsScreen({
 }: ResultsScreenProps) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-      <div className="flex flex-col items-center gap-6 text-center">
+      <div className="flex flex-col items-center gap-6 text-center w-full max-w-4xl">
         <h1 className="text-5xl font-bold">Results</h1>
         <p className="text-2xl">
           You scored <span className="text-green-400 font-bold">{score}</span>{" "}

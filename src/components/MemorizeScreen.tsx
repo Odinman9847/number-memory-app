@@ -15,7 +15,7 @@ export default function MemorizeScreen({
 }: MemorizeScreenProps) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
         <h1 className="text-3xl text-slate-400">Memorize the number</h1>
         <div className="text-2xl text-slate-500">
           Time: {elapsedTime.toFixed(2)}s
