@@ -104,6 +104,7 @@ export default function HomePage() {
         userAnswer={userAnswer}
         setUserAnswer={setUserAnswer}
         handleSubmit={handleSubmit}
+        numberOfDigits={numberOfDigits}
       />
     );
   }

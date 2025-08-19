@@ -3,6 +3,7 @@ type RecallScreenProps = {
   userAnswer: string;
   setUserAnswer: (value: string) => void;
   handleSubmit: () => void;
+  numberOfDigits: string;
 };
 
 export default function RecallScreen({
@@ -10,7 +11,10 @@ export default function RecallScreen({
   userAnswer,
   setUserAnswer,
   handleSubmit,
+  numberOfDigits,
 }: RecallScreenProps) {
+  const digitsOnlyAnswer = userAnswer.replace(/\s/g, "");
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
       <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
@@ -21,12 +25,18 @@ export default function RecallScreen({
           </span>
         </div>
         <h1 className="text-3xl text-slate-400">What was the number?</h1>
-        <input
-          type="text"
-          className="bg-slate-700 p-2 rounded-md text-center text-x1 font-mono tracking-widest w-96"
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-        />
+        <div className="flex w-full max-w-lg flex-col items-center gap-2">
+          <input
+            type="text"
+            className="bg-slate-700 p-2 rounded-md text-center text-x1 font-mono tracking-widest w-96"
+            value={userAnswer}
+            onChange={(e) => setUserAnswer(e.target.value)}
+          />
+          <p className="text-slate-400 text-sm">
+            {digitsOnlyAnswer.length} / {numberOfDigits}
+          </p>
+        </div>
+
         <button
           className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-md text-xl"
           onClick={handleSubmit}
