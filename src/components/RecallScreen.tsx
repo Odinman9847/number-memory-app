@@ -14,6 +14,12 @@ export default function RecallScreen({
   numberOfDigits,
 }: RecallScreenProps) {
   const digitsOnlyAnswer = userAnswer.replace(/\s/g, "");
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value;
+    const sanitizedValue = rawValue.replace(/[^0-9\s]/g, "");
+
+    setUserAnswer(sanitizedValue);
+  };
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
@@ -33,7 +39,7 @@ export default function RecallScreen({
             type="text"
             className="bg-slate-700 p-2 rounded-md text-center text-x1 font-mono tracking-widest w-96"
             value={userAnswer}
-            onChange={(e) => setUserAnswer(e.target.value)}
+            onChange={handleInputChange}
           />
           <p className="text-slate-400 text-sm">
             {digitsOnlyAnswer.length} / {numberOfDigits}
