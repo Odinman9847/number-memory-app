@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const generateRandomNumber = (length: number): string => {
   let result = "";
@@ -18,6 +18,24 @@ export default function HomePage() {
   const [numberOfDigits, setNumberOfDigits] = useState("");
   const [gameState, setGameState] = useState("setup");
   const [numberToMemorize, setNumberToMemorize] = useState("");
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (gameState === "memorizing") {
+      const startTime = Date.now();
+      timerIntervalRef.current = setInterval(() => {
+        setElapsedTime((Date.now() - startTime) / 1000);
+      }, 10);
+    }
+
+    return () => {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+      }
+    };
+  }, [gameState]);
+
   const handleStartGame = () => {
     const digits = parseInt(numberOfDigits, 10);
     if (isNaN(digits) || digits <= 0) {
@@ -65,6 +83,9 @@ export default function HomePage() {
       <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
         <div className="flex flex-col items-center gap-8">
           <h1 className="text-3xl text-slate-400">Memorize the number</h1>
+          <div className="text-2xl text-slate-500">
+            Time: {elapsedTime.toFixed(2)}s
+          </div>
           <div className="text-6xl font-mono tracking-widest">
             {formatNumber(numberToMemorize)}
           </div>
