@@ -17,6 +17,7 @@ export default function ResultsScreen({
   userAnswer,
   handlePlayAgain,
 }: ResultsScreenProps) {
+  const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-4xl">
@@ -35,7 +36,19 @@ export default function ResultsScreen({
           <p className="tracking-widest">{formatNumber(numberToMemorize)}</p>
           <p className="text-slate-400 mt-2">Your Answer:</p>
           <p className="tracking-widest">
-            {formatNumber(userAnswer.replace(/\s/g, ""))}
+            {cleanedUserAnswer.split("").map((digit, index) => {
+              const isCorrect = numberToMemorize[index] === digit;
+              const digitColor = isCorrect ? "text-green-400" : "text-red-500";
+              const isLastDigit = index === cleanedUserAnswer.length - 1;
+              const addSpace = (index + 1) % 2 === 0 && !isLastDigit;
+              return (
+                <span key={index}>
+                  <span className={digitColor}>{digit}</span>
+                  {addSpace && " "}
+                </span>
+              );
+            })}
+            ;
           </p>
         </div>
         <button
