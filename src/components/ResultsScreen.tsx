@@ -21,19 +21,19 @@ export default function ResultsScreen({
 }: ResultsScreenProps) {
   const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+    <main className="flex-grow flex justify-center items-center bg-slate-900 text-white">
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-4xl">
-        <h1 className="text-5xl font-bold">Results</h1>
-        <p className="text-2xl">
+        <h1 className="text-5xl lg:text-7xl font-bold m-3">Results</h1>
+        <p className="text-2xl lg:text-3xl">
           You scored <span className="text-green-400 font-bold">{score}</span>{" "}
           out of <span className="font-bold">{numberToMemorize.length} </span>
           correct!
         </p>
-        <p className="text-xl">
+        <p className="text-xl lg:text-3xl mb-4">
           Your time was
           <span className="font-bold"> {finalTime.toFixed(2)}s</span>.
         </p>
-        <div className="font-mono text-lg mt-4">
+        <div className="font-mono text-lg lg:text-2xl m-4">
           <p className="text-slate-400">Correct Answer:</p>
           <p className="tracking-widest">{formatNumber(numberToMemorize)}</p>
           <p className="text-slate-400 mt-2">Your Answer:</p>

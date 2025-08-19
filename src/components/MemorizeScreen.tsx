@@ -16,15 +16,15 @@ export default function MemorizeScreen({
   handleMemorized,
 }: MemorizeScreenProps) {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+    <main className="flex-grow flex justify-center items-center bg-slate-900 text-white">
       <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
-        <h1 className="text-3xl text-slate-400 text-center">
+        <h1 className="text-3xl lg:text-5xl text-slate-400 text-center">
           Memorize the number
         </h1>
-        <div className="text-2xl text-slate-500 text-center">
+        <div className="text-2xl lg:text-4xl text-slate-500 text-center">
           Time: {elapsedTime.toFixed(2)}s
         </div>
-        <div className="text-6xl font-mono tracking-widest text-center lg:text-left">
+        <div className="text-6xl lg:text-8xl m-6 font-mono tracking-widest text-center lg:text-left">
           {formatNumber(numberToMemorize)}
         </div>
         <Button onClick={handleMemorized}>I've Memorized It!</Button>
