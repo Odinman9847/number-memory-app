@@ -16,7 +16,7 @@ export default function RecallScreen({
   numberOfDigits,
 }: RecallScreenProps) {
   const digitsOnlyAnswer = userAnswer.replace(/\s/g, "");
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const rawValue = e.target.value;
     const sanitizedValue = rawValue.replace(/[^0-9\s]/g, "");
 
@@ -39,11 +39,11 @@ export default function RecallScreen({
           What was the number?
         </h1>
         <div className="flex w-4/5 max-w-lg flex-col items-center gap-2">
-          <input
-            type="text"
-            className="bg-slate-700 p-2 rounded-md text-center text-xl lg:text-3xl font-mono tracking-widest"
+          <textarea
+            className="bg-slate-800 border border-slate-700 p-4 rounded-lg font-mono tracking-widest w-full h-32 text-xl lg:text-2xl resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500"
             value={userAnswer}
             onChange={handleInputChange}
+            placeholder="Start typing the numbers here..."
           />
           <p className="text-slate-400 text-sm lg:text-lg">
             {digitsOnlyAnswer.length} / {numberOfDigits}
