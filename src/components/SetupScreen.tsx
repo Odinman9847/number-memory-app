@@ -41,6 +41,54 @@ export default function SetupScreen({
               onChange={(e) => setNumberOfDigits(e.target.value)}
             />
           </div>
+
+          <div className="flex justify-center gap-2 lg:gap-4 flex-wrap">
+            <button
+              type="button"
+              onClick={() => setNumberOfDigits("10")}
+              className={`w-24 py-2 rounded-md transition-colors duration-200 active:scale-95 hover:bg-emerald-500 ${
+                numberOfDigits === "10"
+                  ? "bg-emerald-500 text-white"
+                  : "bg-slate-700 text-slate-300"
+              }`}
+            >
+              Easy
+            </button>
+            <button
+              type="button"
+              onClick={() => setNumberOfDigits("25")}
+              className={`w-24 py-1 rounded-md transition-colors duration-200 active:scale-95 hover:bg-yellow-500 ${
+                numberOfDigits === "25"
+                  ? "bg-yellow-500 text-white"
+                  : "bg-slate-700 text-slate-300"
+              }`}
+            >
+              Medium
+            </button>
+            <button
+              type="button"
+              onClick={() => setNumberOfDigits("50")}
+              className={`w-24 py-1 rounded-md transition-colors duration-200 active:scale-95 hover:bg-orange-500 ${
+                numberOfDigits === "50"
+                  ? "bg-orange-500 text-white"
+                  : "bg-slate-700 text-slate-300"
+              }`}
+            >
+              Hard
+            </button>
+            <button
+              type="button"
+              onClick={() => setNumberOfDigits("100")}
+              className={`w-24 py-1 rounded-md transition-colors duration-200 active:scale-95 hover:bg-red-500 ${
+                numberOfDigits === "100"
+                  ? "bg-red-500 text-white"
+                  : "bg-slate-700 text-slate-300"
+              }`}
+            >
+              Insane
+            </button>
+          </div>
+
           <div className="flex flex-col gap-2 w-4/5 max-w-xs">
             <label
               htmlFor="grouping"
