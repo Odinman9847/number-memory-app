@@ -16,6 +16,7 @@ const generateRandomNumber = (length: number): string => {
 
 export default function HomePage() {
   const [numberOfDigits, setNumberOfDigits] = useState("10");
+  const [groupingSize, setGroupingSize] = useState("2");
   const [gameState, setGameState] = useState("setup");
   const [numberToMemorize, setNumberToMemorize] = useState("");
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -102,6 +103,8 @@ export default function HomePage() {
         numberOfDigits={numberOfDigits}
         setNumberOfDigits={setNumberOfDigits}
         handleStartGame={handleStartGame}
+        groupingSize={groupingSize}
+        setGroupingSize={setGroupingSize}
       />
     );
   }
@@ -112,6 +115,7 @@ export default function HomePage() {
         numberToMemorize={numberToMemorize}
         elapsedTime={elapsedTime}
         handleMemorized={handleMemorized}
+        groupingSize={groupingSize}
       />
     );
   }

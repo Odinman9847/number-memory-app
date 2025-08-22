@@ -2,16 +2,20 @@ import Button from "./Button";
 
 type MemorizeScreenProps = {
   numberToMemorize: string;
+  groupingSize: string;
   elapsedTime: number;
   handleMemorized: () => void;
 };
 
-const formatNumber = (numStr: string): string => {
-  return numStr.match(/.{1,2}/g)?.join(" ") || "";
+const formatNumber = (numStr: string, groupSize: number): string => {
+  if (groupSize <= 0) return numStr;
+  const regex = new RegExp(`.{1,${groupSize}}`, "g");
+  return numStr.match(regex)?.join(" ") || "";
 };
 
 export default function MemorizeScreen({
   numberToMemorize,
+  groupingSize,
   elapsedTime,
   handleMemorized,
 }: MemorizeScreenProps) {
@@ -25,7 +29,7 @@ export default function MemorizeScreen({
           Time: {elapsedTime.toFixed(2)}s
         </div>
         <div className="text-6xl lg:text-7xl m-6 font-mono tracking-widest text-center lg:leading-relaxed lg:text-left lg:m-auto">
-          {formatNumber(numberToMemorize)}
+          {formatNumber(numberToMemorize, parseInt(groupingSize))}
         </div>
         <Button onClick={handleMemorized}>I&apos;ve Memorized It!</Button>
       </div>
