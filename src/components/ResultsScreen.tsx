@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Button from "./Button";
 
 type ResultsScreenProps = {
@@ -25,7 +26,13 @@ export default function ResultsScreen({
 }: ResultsScreenProps) {
   const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
   return (
-    <main className="flex-grow flex justify-center items-center bg-slate-900 text-white">
+    <motion.main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex-grow flex justify-center items-center absolute inset-0 bg-slate-900 text-white"
+    >
       <div className="flex flex-col items-center gap-6 text-center w-full max-w-4xl">
         <h1 className="text-5xl lg:text-7xl font-bold m-3">Results</h1>
         <p className="text-2xl lg:text-3xl">
@@ -63,6 +70,6 @@ export default function ResultsScreen({
         </div>
         <Button onClick={handlePlayAgain}>Play Again</Button>
       </div>
-    </main>
+    </motion.main>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import SetupScreen from "@/components/SetupScreen";
 import MemorizeScreen from "@/components/MemorizeScreen";
 import RecallScreen from "@/components/RecallScreen";
@@ -102,51 +103,55 @@ export default function HomePage() {
     };
   }, [gameState]);
 
-  if (gameState === "setup") {
-    return (
-      <SetupScreen
-        numberOfDigits={numberOfDigits}
-        setNumberOfDigits={setNumberOfDigits}
-        handleStartGame={handleStartGame}
-        groupingSize={groupingSize}
-        setGroupingSize={setGroupingSize}
-      />
-    );
-  }
+  return (
+    <AnimatePresence>
+      {gameState === "setup" && (
+        <motion.div key="setup">
+          <SetupScreen
+            numberOfDigits={numberOfDigits}
+            setNumberOfDigits={setNumberOfDigits}
+            handleStartGame={handleStartGame}
+            groupingSize={groupingSize}
+            setGroupingSize={setGroupingSize}
+          />
+        </motion.div>
+      )}
 
-  if (gameState === "memorizing") {
-    return (
-      <MemorizeScreen
-        numberToMemorize={numberToMemorize}
-        elapsedTime={elapsedTime}
-        handleMemorized={handleMemorized}
-        groupingSize={groupingSize}
-      />
-    );
-  }
+      {gameState === "memorizing" && (
+        <motion.div key="memorizing">
+          <MemorizeScreen
+            numberToMemorize={numberToMemorize}
+            elapsedTime={elapsedTime}
+            handleMemorized={handleMemorized}
+            groupingSize={groupingSize}
+          />
+        </motion.div>
+      )}
 
-  if (gameState === "recall") {
-    return (
-      <RecallScreen
-        finalTime={finalTime}
-        userAnswer={userAnswer}
-        setUserAnswer={setUserAnswer}
-        handleSubmit={handleSubmit}
-        numberOfDigits={numberOfDigits}
-      />
-    );
-  }
+      {gameState === "recall" && (
+        <motion.div key="recall">
+          <RecallScreen
+            finalTime={finalTime}
+            userAnswer={userAnswer}
+            setUserAnswer={setUserAnswer}
+            handleSubmit={handleSubmit}
+            numberOfDigits={numberOfDigits}
+          />
+        </motion.div>
+      )}
 
-  if (gameState === "results") {
-    return (
-      <ResultsScreen
-        score={score}
-        numberToMemorize={numberToMemorize}
-        finalTime={finalTime}
-        userAnswer={userAnswer}
-        handlePlayAgain={handlePlayAgain}
-        groupingSize={groupingSize}
-      />
-    );
-  }
+      {gameState === "results" && (
+        <motion.div key="results">
+          <ResultsScreen
+            score={score}
+            numberToMemorize={numberToMemorize}
+            finalTime={finalTime}
+            userAnswer={userAnswer}
+            handlePlayAgain={handlePlayAgain}
+            groupingSize={groupingSize}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 }

@@ -7,7 +7,7 @@ type ButtonProps = {
 export default function Button({ children, className, ...rest }: ButtonProps) {
   const baseStyles = `
     bg-transparent border-2 border-emerald-500
-    text-emerald-500 px-6 py-2 rounded-lg text-xl lg:text-3xl
+    text-emerald-500 px-6 py-2 rounded-lg text-2xl lg:text-4xl
     font-bold hover:bg-emerald-500 hover:text-white
     active:scale-95 transition-all duration-200
   `;
