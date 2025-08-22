@@ -33,13 +33,7 @@ export default function RecallScreen({
   }, []);
 
   return (
-    <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="flex-grow flex justify-center items-center absolute inset-0 bg-slate-900 text-white"
-    >
+    <motion.main className="flex-grow flex justify-center items-center bg-slate-900 text-white">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center gap-8 w-full max-w-4xl"

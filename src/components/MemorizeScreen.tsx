@@ -21,13 +21,7 @@ export default function MemorizeScreen({
   handleMemorized,
 }: MemorizeScreenProps) {
   return (
-    <motion.main
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="flex-grow flex justify-center items-center absolute inset-0 bg-slate-900 text-white"
-    >
+    <motion.main className="flex-grow flex justify-center items-center bg-slate-900 text-white">
       <div className="flex flex-col items-center gap-8 w-full max-w-4xl">
         <h1 className="text-3xl lg:text-5xl text-slate-400 text-center">
           Memorize the number

@@ -104,9 +104,15 @@ export default function HomePage() {
   }, [gameState]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {gameState === "setup" && (
-        <motion.div key="setup">
+        <motion.div
+          key="setup"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.2 } }}
+          exit={{ opacity: 0, transition: { duration: 0 } }}
+          className="w-full"
+        >
           <SetupScreen
             numberOfDigits={numberOfDigits}
             setNumberOfDigits={setNumberOfDigits}
@@ -118,7 +124,13 @@ export default function HomePage() {
       )}
 
       {gameState === "memorizing" && (
-        <motion.div key="memorizing">
+        <motion.div
+          key="memorizing"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.2 } }}
+          className="w-full"
+        >
           <MemorizeScreen
             numberToMemorize={numberToMemorize}
             elapsedTime={elapsedTime}
@@ -129,7 +141,14 @@ export default function HomePage() {
       )}
 
       {gameState === "recall" && (
-        <motion.div key="recall">
+        <motion.div
+          key="recall"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="w-full"
+        >
           <RecallScreen
             finalTime={finalTime}
             userAnswer={userAnswer}
@@ -141,7 +160,14 @@ export default function HomePage() {
       )}
 
       {gameState === "results" && (
-        <motion.div key="results">
+        <motion.div
+          key="results"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="w-full"
+        >
           <ResultsScreen
             score={score}
             numberToMemorize={numberToMemorize}
