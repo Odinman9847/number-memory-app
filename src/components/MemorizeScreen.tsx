@@ -27,7 +27,7 @@ export default function MemorizeScreen({
         <div className="text-6xl lg:text-7xl m-6 font-mono tracking-widest text-center lg:leading-relaxed lg:text-left lg:m-auto">
           {formatNumber(numberToMemorize)}
         </div>
-        <Button onClick={handleMemorized}>I've Memorized It!</Button>
+        <Button onClick={handleMemorized}>I&apos;ve Memorized It!</Button>
       </div>
     </main>
   );
