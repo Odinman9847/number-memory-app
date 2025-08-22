@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import Button from "./Button";
 
 type RecallScreenProps = {
@@ -16,12 +17,19 @@ export default function RecallScreen({
   numberOfDigits,
 }: RecallScreenProps) {
   const digitsOnlyAnswer = userAnswer.replace(/\s/g, "");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const rawValue = e.target.value;
     const sanitizedValue = rawValue.replace(/[^0-9\s]/g, "");
 
     setUserAnswer(sanitizedValue);
   };
+
+  useEffect(() => {
+    if (textAreaRef.current) {
+      textAreaRef.current.focus();
+    }
+  }, []);
 
   return (
     <main className="flex-grow flex justify-center items-center bg-slate-900 text-white">
@@ -40,6 +48,7 @@ export default function RecallScreen({
         </h1>
         <div className="flex w-4/5 max-w-lg flex-col items-center gap-2">
           <textarea
+            ref={textAreaRef}
             className="bg-slate-800 border border-slate-700 p-4 rounded-lg font-mono tracking-widest w-full h-32 text-xl lg:text-2xl resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500"
             value={userAnswer}
             onChange={handleInputChange}
