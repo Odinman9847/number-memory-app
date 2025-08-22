@@ -32,6 +32,11 @@ export default function HomePage() {
       alert("Please enter a valid number of digits.");
       return;
     }
+    const group = parseInt(groupingSize, 10);
+    if (isNaN(group) || group < 0) {
+      alert("Please enter a valid group size");
+      return;
+    }
     const newNumber = generateRandomNumber(digits);
     setNumberToMemorize(newNumber);
     setGameState("memorizing");
@@ -140,6 +145,7 @@ export default function HomePage() {
         finalTime={finalTime}
         userAnswer={userAnswer}
         handlePlayAgain={handlePlayAgain}
+        groupingSize={groupingSize}
       />
     );
   }

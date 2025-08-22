@@ -6,10 +6,13 @@ type ResultsScreenProps = {
   finalTime: number;
   userAnswer: string;
   handlePlayAgain: () => void;
+  groupingSize: string;
 };
 
-const formatNumber = (numStr: string): string => {
-  return numStr.match(/.{1,2}/g)?.join(" ") || "";
+const formatNumber = (numStr: string, groupSize: number): string => {
+  if (groupSize <= 0) return numStr;
+  const regex = new RegExp(`.{1,${groupSize}}`, "g");
+  return numStr.match(regex)?.join(" ") || "";
 };
 
 export default function ResultsScreen({
@@ -18,6 +21,7 @@ export default function ResultsScreen({
   finalTime,
   userAnswer,
   handlePlayAgain,
+  groupingSize,
 }: ResultsScreenProps) {
   const cleanedUserAnswer = userAnswer.replace(/\s/g, "");
   return (
@@ -35,14 +39,19 @@ export default function ResultsScreen({
         </p>
         <div className="font-mono text-lg lg:text-2xl m-4">
           <p className="text-slate-400">Correct Answer:</p>
-          <p className="tracking-widest">{formatNumber(numberToMemorize)}</p>
+          <p className="tracking-widest">
+            {formatNumber(numberToMemorize, parseInt(groupingSize))}
+          </p>
           <p className="text-slate-400 mt-2">Your Answer:</p>
           <p className="tracking-widest">
             {cleanedUserAnswer.split("").map((digit, index) => {
               const isCorrect = numberToMemorize[index] === digit;
               const digitColor = isCorrect ? "text-green-400" : "text-red-500";
+
+              const groupSizeNum = parseInt(groupingSize) || 2;
+
               const isLastDigit = index === cleanedUserAnswer.length - 1;
-              const addSpace = (index + 1) % 2 === 0 && !isLastDigit;
+              const addSpace = (index + 1) % groupSizeNum === 0 && !isLastDigit;
               return (
                 <span key={index}>
                   <span className={digitColor}>{digit}</span>
