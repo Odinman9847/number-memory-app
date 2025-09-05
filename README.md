@@ -1,40 +1,46 @@
 # Number Memory Challenge
 
-A clean and modern web application designed to help users test and improve their number memorization skills. Built from the ground up with a focus on a responsive, minimalist user experience.
+A sleek and minimalist web application designed to test and improve your number memorization skills, built with Next.js and animated with Framer Motion.
 
-## Features
+## [**Live Demo: Test Your Memory Here!**](https://number-memory-app.vercel.app/)
 
-- **Customizable Challenge:** Choose the exact number of digits you want to memorize.
-- **Live Timer:** Track your memorization time down to the millisecond.
-- **Detailed Results:** Get instant feedback on your accuracy, with correct and incorrect digits clearly highlighted.
-- **Fully Responsive:** A fluid and intuitive experience on both desktop and mobile devices.
+---
 
-## Tech Stack
+### Key Features
+
+This application offers a minimalistic and customizable user experience from start to finish.
+
+### Screenshots
+
+---
+
+**Setup Screen**
+![Number Memory Welcome Screen](./.github/assets/welcome-screen.png)
+
+**Results Screen**
+![Number Memory Results Screen](./.github/assets/results-screen.png)
+
+- **Customizable Challenge:** Tailor the difficulty by choosing the number of digits and the grouping size.
+- **Live Performance Timer:** A real-time timer tracks your memorization speed from the moment the numbers are revealed.
+- **Detailed Feedback:** Get an instant, side-by-side comparison of your answer versus the correct sequence, with digits highlighted for clear feedback.
+- **Smooth Animations:** Fluid transitions between game states are powered by Framer Motion to create a modern and engaging feel.
+
+---
+
+### Tech Stack
 
 - **Framework:** [Next.js](https://nextjs.org/) (with App Router)
+- **UI Library:** [React](https://react.dev/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **State Management:** React Hooks
+- **Animation:** [Framer Motion](https://www.motion.dev/)
 
-## Getting Started
+---
 
-To run this project locally:
+### Project Highlights
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/Odinman9847/number-memory-app.git
-    ```
-2.  Navigate into the project directory:
-    ```bash
-    cd number-memory-app
-    ```
-3.  Install the dependencies:
-    ```bash
-    npm install
-    ```
-4.  Start the development server:
-    ```bash
-    npm run dev
-    ```
+As my first major project, this was a deep dive into building a complete application with a modern tech stack. Key achievements include:
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+- Managing complex game state, including timers, user input, and multiple game phases, using React Hooks.
+- Implementing a responsive, mobile-first design system with Tailwind CSS.
+- Creating a polished user experience with fluid animations using Framer Motion.
